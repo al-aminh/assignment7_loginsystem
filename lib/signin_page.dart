@@ -1,7 +1,24 @@
 import 'package:flutter/material.dart';
 
-class Signinpage extends StatelessWidget {
+class Signinpage extends StatefulWidget {
   const Signinpage({super.key});
+
+  @override
+  State<Signinpage> createState() => _SigninpageState();
+}
+
+class _SigninpageState extends State<Signinpage> {
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  void submit(){
+    String email = emailController.text;
+    String password = passwordController.text;
+
+    print("Email: $email");
+    print("Password: $password");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +59,7 @@ class Signinpage extends StatelessWidget {
                 child: Padding(
                     padding: EdgeInsets.all(30),
                     child: Column(
-                      children: <Widget>[
+                      children: [
                         SizedBox(height: 60,),
                         Container(
                           decoration: BoxDecoration(
@@ -62,8 +79,10 @@ class Signinpage extends StatelessWidget {
                                   border: Border(bottom: BorderSide(color: Colors.grey.shade200))
                                 ),
                                 child: TextField(
+                                  controller: emailController,
+                                  keyboardType: TextInputType.emailAddress,
                                   decoration: InputDecoration(
-                                    hintText: "Email or Phone number",
+                                    hintText: "Email",
                                     hintStyle: TextStyle(color: Colors.grey),
                                     border: InputBorder.none
                                   ),
@@ -75,12 +94,14 @@ class Signinpage extends StatelessWidget {
                                   border: Border(bottom: BorderSide(color: Colors.grey.shade200))
                                 ),
                                 child: TextField(
+                                  controller: passwordController,
                                   obscureText: true,
                                   decoration: InputDecoration(
                                     hintText: "Password",
                                     hintStyle: TextStyle(color: Colors.grey),
                                     border: InputBorder.none
                                   ),
+                                  
                                 ),
                               ),
                             ],
@@ -90,7 +111,7 @@ class Signinpage extends StatelessWidget {
                         Text("Forgot Password?", style: TextStyle(color: Colors.grey),),
                         SizedBox(height: 40,),
                         MaterialButton(
-                          onPressed: () {},
+                          onPressed: submit,
                           height: 50,
                           // margin: EdgeInsets.symmetric(horizontal: 50),
                           color: Color.fromRGBO(35, 145, 15, 1),
